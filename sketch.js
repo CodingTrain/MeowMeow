@@ -42,14 +42,13 @@ function setup() {
 
 // Initialize tiles and board
 function initializeTiles() {
-  for (let i = 0; i < cols; i++) {
-    for (let j = 0; j < rows; j++) {
+  for (let j = 0; j < rows; j++) {
+    for (let i = 0; i < cols; i++) {
       let x = i * w;
       let y = j * h;
       let img = createImage(floor(w), floor(h));
       let index = i + j * cols;
       board.push(index);
-
       let tile = new Tile(index, img);
       tiles[index] = tile;
     }
@@ -58,15 +57,15 @@ function initializeTiles() {
   updateTiles();
   tiles.pop();
   board.pop();
-  board.push(-1); // Marking the last tile as blank
+  board.push(-1);
 }
 
 // Copying original image to tiles
 function updateTiles() {
-  for (let i = 0; i < cols; i++) {
-    for (let j = 0; j < rows; j++) {
-      let x = j * w;
-      let y = i * h;
+  for (let j = 0; j < rows; j++) {
+    for (let i = 0; i < cols; i++) {
+      let x = i * w;
+      let y = j * h;
       let index = i + j * cols;
       if (tiles[index]) tiles[index].img.copy(source, x, y, w, h, 0, 0, w, h);
     }
@@ -148,8 +147,8 @@ function draw() {
   background(0);
 
   // Draw everything
-  for (let i = 0; i < cols; i++) {
-    for (let j = 0; j < rows; j++) {
+  for (let j = 0; j < rows; j++) {
+    for (let i = 0; i < cols; i++) {
       let index = i + j * cols;
       let x = i * w;
       let y = j * h;
@@ -183,12 +182,16 @@ function draw() {
       rect(x, y, w, h);
     }
   }
+
+  if (isSolved()) {
+    image(source, 0, 0);
+  }
 }
 
 // Check if the puzzle is solved
 function isSolved() {
-  for (let i = 0; i < board.length - 1; i++) {
-    if (board[i] !== tiles[i].index) {
+  for (let i = 0; i < board.length; i++) {
+    if (board[i] !== i && board[i] !== -1) {
       return false;
     }
   }
