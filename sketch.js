@@ -121,7 +121,7 @@ let targetX, targetY;
 
 // A click!
 let lastTouchEventTime = 0;
-const touchCooldown = 100;
+const touchCooldown = 200;
 
 function mousePressed() {
   // cool down
@@ -231,12 +231,18 @@ function findBlank() {
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
-  const deviceWidth = screen.width;
-  const canvasWidth = 600;
+  const deviceWidth = window.innerWidth;
+  const deviceHeight = window.innerHeight;
+  const canvasSize = 600;
 
-  const scale = (0.9 * deviceWidth) / canvasWidth;
+  // Determine the scaling factor based on the smaller dimension
+  const scaleWidth = (0.9 * deviceWidth) / canvasSize;
+  const scaleHeight = (0.9 * deviceHeight) / canvasSize;
 
-  if (scale > 1) scale == 1.0;
+  // Use the smaller scale factor
+  let scale = Math.min(scaleWidth, scaleHeight);
+
+  if (scale > 1) scale = 1.0;
 
   const viewport = document.querySelector('meta[name="viewport"]');
 
