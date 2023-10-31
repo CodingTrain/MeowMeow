@@ -40,13 +40,13 @@ function setup() {
   initializeTiles();
 
   filenames = filenames.filter((item) => item);
-  filenames.forEach((filename, index) => {
-    loadImage('tiles/' + filename, (img) => {
+  for (let i = 0; i < filenames.length; i++) {
+    loadImage('tiles/' + filenames[i], (img) => {
       img.resize(w, h);
-      let tile = tiles[index];
+      let tile = tiles[i];
       tile.img.copy(img, 0, 0, w, h, 0, 0, w, h);
     });
-  });
+  }
 
   //tiles.pop();
   board.pop();
@@ -120,7 +120,18 @@ let amt = 0;
 let targetX, targetY;
 
 // A click!
+let lastTouchEventTime = 0;
+const touchCooldown = 200;
+
 function mousePressed() {
+  // cool down
+  const currentTime = Date.now();
+  if (currentTime - lastTouchEventTime < touchCooldown) {
+    return;
+  }
+
+  lastTouchEventTime = currentTime;
+
   let i = floor(mouseX / w);
   let j = floor(mouseY / h);
 
@@ -221,11 +232,17 @@ function findBlank() {
 
 window.addEventListener('DOMContentLoaded', (event) => {
   const deviceWidth = screen.width;
-  const canvasWidth = 600;
+  const deviceHeight = screen.height;
+  const canvasSize = 600;
 
-  const scale = (0.9 * deviceWidth) / canvasWidth;
+  // Determine the scaling factor based on the smaller dimension
+  const scaleWidth = (0.9 * deviceWidth) / canvasSize;
+  const scaleHeight = (0.9 * deviceHeight) / canvasSize;
 
-  if (scale > 1) scale == 1.0;
+  // Use the smaller scale factor
+  let scale = Math.min(scaleWidth, scaleHeight);
+
+  if (scale > 1) scale = 1.0;
 
   const viewport = document.querySelector('meta[name="viewport"]');
 
@@ -234,3 +251,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     `width=device-width, initial-scale=${scale}, maximum-scale=${scale}, user-scalable=no`
   );
 });
+
+function touchMoved() {
+  // This prevents the touch move from scrolling the page
+  return false;
+}
