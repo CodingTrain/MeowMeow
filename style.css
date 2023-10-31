@@ -2,7 +2,7 @@ html,
 body {
   height: 100%;
   margin: 0;
-  background-color: black;
+  background-color: #1b015a;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,7 +13,7 @@ header {
   justify-content: center;
   align-items: center;
   width: 100%;
-  background-color: black;
+  background-color: #1b015a;
   margin: 40px 20px;
 }
 
