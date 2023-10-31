@@ -1,5 +1,2 @@
-project-directory/
-│   netlify.toml
-│
-└───functions/
-    │   serve-image.js
+[build]
+  functions = "functions"
