@@ -38,15 +38,12 @@ function setup() {
   w = width / cols; // Calculate the width of each tile
   h = height / rows; // Calculate the height of each tile
   initializeTiles();
-  console.log(tiles.length);
 
   filenames = filenames.filter((item) => item);
   filenames.forEach((filename, index) => {
     loadImage('tiles/' + filename, (img) => {
       img.resize(w, h);
       let tile = tiles[index];
-      //console.log(index);
-      //console.log(tile);
       tile.img.copy(img, 0, 0, w, h, 0, 0, w, h);
     });
   });
@@ -79,7 +76,7 @@ function swap(i, j, arr) {
 
 // Shuffle of the board
 function simpleShuffle(arr) {
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 1200; i++) {
     randomMove(arr);
   }
 }
@@ -223,12 +220,10 @@ function findBlank() {
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
-  // Get the device width
   const deviceWidth = screen.width;
   const canvasWidth = 600;
 
   const scale = (0.9 * deviceWidth) / canvasWidth;
-  console.log(deviceWidth, canvasWidth, scale);
 
   if (scale > 1) scale == 1.0;
 
