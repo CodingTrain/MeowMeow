@@ -40,13 +40,13 @@ function setup() {
   initializeTiles();
 
   filenames = filenames.filter((item) => item);
-  filenames.forEach((filename, index) => {
-    loadImage('tiles/' + filename, (img) => {
+  for (let i = 0; i < filenames.length; i++) {
+    loadImage('tiles/' + filenames[i], (img) => {
       img.resize(w, h);
-      let tile = tiles[index];
+      let tile = tiles[i];
       tile.img.copy(img, 0, 0, w, h, 0, 0, w, h);
     });
-  });
+  }
 
   //tiles.pop();
   board.pop();
