@@ -15,6 +15,9 @@ let cols = 5;
 let rows = 5;
 let w, h;
 
+let filenames = []; // to store the filenames
+let images = []; // to store the loaded images
+
 // Tile class, should include functionality
 class Tile {
   constructor(i, img) {
@@ -23,52 +26,48 @@ class Tile {
   }
 }
 
+// Load filenames
 function preload() {
-  source = loadImage('images/meowmeow-square.png');
+  filenames = loadStrings('tiles.txt');
 }
 
 function setup() {
   createCanvas(600, 600);
-  source.resize(600, 600);
-
-  w = width / cols; // Calculate the width of each tile
-  h = height / rows; // Calculate the height of each tile
 
   // Initializing the tiles and the board
+  w = width / cols; // Calculate the width of each tile
+  h = height / rows; // Calculate the height of each tile
   initializeTiles();
+  console.log(tiles.length);
+
+  filenames = filenames.filter((item) => item);
+  filenames.forEach((filename, index) => {
+    loadImage('tiles/' + filename, (img) => {
+      img.resize(w, h);
+      let tile = tiles[index];
+      //console.log(index);
+      //console.log(tile);
+      tile.img.copy(img, 0, 0, w, h, 0, 0, w, h);
+    });
+  });
+
+  //tiles.pop();
+  board.pop();
+  board.push(-1); // Marking the last tile as blank
+
   // Shuffling the tiles
   simpleShuffle(board);
 }
 
 // Initialize tiles and board
 function initializeTiles() {
-  for (let i = 0; i < cols; i++) {
-    for (let j = 0; j < rows; j++) {
-      let x = i * w;
-      let y = j * h;
+  for (let j = 0; j < rows; j++) {
+    for (let i = 0; i < cols; i++) {
       let img = createImage(floor(w), floor(h));
       let index = i + j * cols;
       board.push(index);
-
       let tile = new Tile(index, img);
       tiles[index] = tile;
-    }
-  }
-
-  updateTiles();
-  tiles.pop();
-  board.pop();
-  board.push(-1); // Marking the last tile as blank
-}
-
-// Copying original image to tiles
-function updateTiles() {
-  for (let i = 0; i < cols; i++) {
-    for (let j = 0; j < rows; j++) {
-      let x = j * w;
-      let y = i * h;
-      let index = i + j * cols;
-      if (tiles[index]) tiles[index].img.copy(source, x, y, w, h, 0, 0, w, h);
     }
   }
 }
@@ -80,7 +79,7 @@ function swap(i, j, arr) {
 
 // Shuffle of the board
 function simpleShuffle(arr) {
-  for (let i = 0; i < 1200; i++) {
+  for (let i = 0; i < 2; i++) {
     randomMove(arr);
   }
 }
@@ -181,6 +180,14 @@ function draw() {
       strokeWeight(1);
       noFill();
       rect(x, y, w, h);
+    }
+  }
+
+  if (isSolved()) {
+    for (let i = 0; i < cols; i++) {
+      for (let j = 0; j < rows; j++) {
+        image(tiles[i + j * cols].img, i * w, j * h);
+      }
     }
   }
 }
