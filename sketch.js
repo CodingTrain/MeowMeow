@@ -231,8 +231,8 @@ function findBlank() {
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
-  const deviceWidth = window.innerWidth;
-  const deviceHeight = window.innerHeight;
+  const deviceWidth = screen.width;
+  const deviceHeight = screen.height;
   const canvasSize = 600;
 
   // Determine the scaling factor based on the smaller dimension
