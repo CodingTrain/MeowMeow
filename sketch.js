@@ -120,7 +120,18 @@ let amt = 0;
 let targetX, targetY;
 
 // A click!
+let lastTouchEventTime = 0;
+const touchCooldown = 100;
+
 function mousePressed() {
+  // cool down
+  const currentTime = Date.now();
+  if (currentTime - lastTouchEventTime < touchCooldown) {
+    return;
+  }
+
+  lastTouchEventTime = currentTime;
+
   let i = floor(mouseX / w);
   let j = floor(mouseY / h);
 
@@ -234,11 +245,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
     `width=device-width, initial-scale=${scale}, maximum-scale=${scale}, user-scalable=no`
   );
 });
-
-// Maybe helps stuttering bug?
-function touchStarted() {
-  return false;
-}
 
 function touchMoved() {
   // This prevents the touch move from scrolling the page
