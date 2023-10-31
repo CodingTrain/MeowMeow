@@ -235,6 +235,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
   );
 });
 
+// Maybe helps stuttering bug?
+function touchStarted() {
+  return false;
+}
+
 function touchMoved() {
   // This prevents the touch move from scrolling the page
   return false;
