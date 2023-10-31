@@ -42,9 +42,9 @@ function setup() {
   filenames = filenames.filter((item) => item);
   filenames.forEach((filename, index) => {
     loadImage('tiles/' + filename, (img) => {
-      img.resize(w, h);
+      // img.resize(w, h);
       let tile = tiles[index];
-      tile.img.copy(img, 0, 0, w, h, 0, 0, w, h);
+      tile.img.copy(img, 0, 0, w * 2, h * 2, 0, 0, w * 2, h * 2);
     });
   });
 
@@ -60,7 +60,7 @@ function setup() {
 function initializeTiles() {
   for (let j = 0; j < rows; j++) {
     for (let i = 0; i < cols; i++) {
-      let img = createImage(floor(w), floor(h));
+      let img = createImage(floor(w * 2), floor(h * 2));
       let index = i + j * cols;
       board.push(index);
       let tile = new Tile(index, img);
@@ -194,7 +194,7 @@ function draw() {
   if (isSolved()) {
     for (let i = 0; i < cols; i++) {
       for (let j = 0; j < rows; j++) {
-        image(tiles[i + j * cols].img, i * w, j * h);
+        image(tiles[i + j * cols].img, i * w, j * h, w, h);
       }
     }
     noLoop();
