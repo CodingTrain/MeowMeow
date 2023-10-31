@@ -24,7 +24,7 @@ class Tile {
 }
 
 function preload() {
-  source = loadImage('a3f5c11b2/meowmeow-square.png');
+  source = loadImage('images/meowmeow-square.png');
 }
 
 function setup() {
