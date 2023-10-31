@@ -79,7 +79,7 @@ function swap(i, j, arr) {
 
 // Shuffle of the board
 function simpleShuffle(arr) {
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 5; i++) {
     randomMove(arr);
   }
 }
@@ -220,3 +220,21 @@ function findBlank() {
     if (board[i] == -1) return i;
   }
 }
+
+window.addEventListener('DOMContentLoaded', (event) => {
+  // Get the device width
+  const deviceWidth = screen.width;
+  const canvasWidth = 600;
+
+  const scale = (0.9 * deviceWidth) / canvasWidth;
+  console.log(deviceWidth, canvasWidth, scale);
+
+  if (scale > 1) scale == 1.0;
+
+  const viewport = document.querySelector('meta[name="viewport"]');
+
+  viewport.setAttribute(
+    'content',
+    `width=device-width, initial-scale=${scale}, maximum-scale=${scale}, user-scalable=no`
+  );
+});
