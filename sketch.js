@@ -234,3 +234,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     `width=device-width, initial-scale=${scale}, maximum-scale=${scale}, user-scalable=no`
   );
 });
+
+function touchMoved() {
+  // This prevents the touch move from scrolling the page
+  return false;
+}
