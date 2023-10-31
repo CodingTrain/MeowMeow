@@ -1,0 +1,14 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0; /* Optional: changes the background color */
+}
+
+canvas {
+  display: block;
+  border: 1px solid black; /* Optional: adds a border around the canvas */
+}
