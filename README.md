@@ -1,6 +1,7 @@
 # Meow Meow Puzzle
 
-- [Slide Puzzle Coding Challenge](https://thecodingtrain.com/CodingChallenges/165-slide-puzzle.html)
+- [Where's Meow Meow?](https://meow-meow-ceo.netlify.app/)
+- Code based on [Slide Puzzle Challenge](https://thecodingtrain.com/challenges/165-slide-puzzle)
 
 ## Code Structure
 
