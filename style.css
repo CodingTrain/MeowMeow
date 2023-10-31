@@ -2,13 +2,27 @@ html,
 body {
   height: 100%;
   margin: 0;
+  background-color: #1b015a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f0f0f0; /* Optional: changes the background color */
+  width: 100%;
+  background-color: #1b015a;
+  margin: 80px 0px 20px 0px;
 }
 
 canvas {
   display: block;
-  border: 1px solid black; /* Optional: adds a border around the canvas */
+  border: 1px solid black;
+}
+
+img {
+  width: 50px;
+  height: auto;
 }
