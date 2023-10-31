@@ -189,6 +189,7 @@ function draw() {
         image(tiles[i + j * cols].img, i * w, j * h);
       }
     }
+    noLoop();
   }
 }
 
